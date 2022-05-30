@@ -1,0 +1,224 @@
+SQL Practice 
+
+SELECT statements paractice from WORLD Tutorial: https://sqlzoo.net/wiki/SELECT_from_WORLD_Tutorial
+
+1.Countries where population is at least 2 million
+
+SELECT name FROM world WHERE population >= 200000000
+
+Correct answer
+
+name
+Brazil
+China
+India
+Indonesia
+United States
+
+2. Countries where per_capital_GDP is at least 2 million
+
+SELECT name,gdp/population AS per_capital_GDP FROM world WHERE population >= 200000000
+
+Correct answer
+
+name	       per_capital_GDP
+Brazil	       11115.264751422625
+China	        6121.710598592322
+India	        1504.793124478397
+Indonesia	    3482.020488188676
+United States  51032.294546368440
+
+3. South America countries and their population_in_millions
+
+SELECT name,population/1000000 AS Population_in_millions FROM world WHERE continent = 'South America'
+
+Correct answer
+
+name	                          Population_in_millions
+Argentina	                        42.6695
+Bolivia	                            10.027254
+Brazil                             202.794
+Chile	                            17.773
+Colombia	                        47.662
+Ecuador	                            15.7742
+Guyana                               0.784894
+Paraguay	                         6.783374
+Peru	                            30.475144
+Saint Vincent and the Grenadines     0.109
+Suriname	                         0.534189
+Uruguay	                             3.286314
+Venezuela	                        28.946101
+
+4.Population of France, Germany and Italy
+
+SELECT name,population FROM world WHERE name in ('France', 'Germany','Italy')
+
+Correct answer
+
+name	population
+France	65906000
+Germany	80716000
+Italy	60782668
+
+5. Countries with name that includes United
+
+SELECT name FROM world WHERE name LIKE '%United%'
+
+Correct answer
+name
+United Arab Emirates
+United Kingdom
+United States
+
+6. Countries with area greater than 3 million or population greater than 250 million
+
+SELECT name,population,area FROM world WHERE area > 3000000 or population > 250000000
+
+Correct answer
+
+name	       population  	area
+Australia       23545500	7692024
+Brazil	       202794000	8515767
+Canada	        35427524	9984670
+China	      1365370000	9596961
+India	      1246160000	3166414
+Indonesia      252164800	1904569
+Russia	       146000000   17125242
+United States  318320000	9826675
+
+7.6. Countries with either area greater than 3 million or population greater than 250 million(XOR)
+
+SELECT name,population,area FROM world WHERE (area > 3000000 AND population <= 250000000) OR (area <= 3000000 AND population > 250000000) 
+
+Correct answer
+
+name	    population   area
+Australia	 23545500	 7692024
+Brazil	    202794000	 8515767
+Canada	     35427524	 9984670
+Indonesia	252164800	 1904569
+Russia	    146000000	17125242
+
+8. South America countries with their population_in_millions and gdp_in_billions
+
+SELECT name,ROUND(population/1000000,2) AS population_in_millions, ROUND(gdp/1000000000,2) AS gdp_in_billions FROM world WHERE continent = 'South America'
+
+Correct answer
+
+name	                          population_in_millions	gdp_in_billions
+Argentina	                      42.67                 	477.03
+Bolivia	                          10.03	                     27.04
+Brazil	                         202.79                    2254.11
+Chile	                          17.77	                    268.31
+Colombia	                      47.66                 	369.81
+Ecuador	                          15.77                  	 87.50
+Guyana	                           0.78	                      2.85
+Paraguay	                       6.78	                     25.94
+Peru	                          30.48	                    204.68
+Saint Vincent and the Grenadine    0.11                    	  0.69
+Suriname                           0.53                       5.01
+Uruguay	                           3.29	                     49.92
+Venezuela	                      28.95                     382.42
+
+9. Countries per_capital_GDP valued nearest to 1000 with gdp at least 1 trillion
+
+SELECT name,ROUND(gdp/population,-3) AS per_capital_GDP FROM world WHERE gdp >= 1000000000000(Value nearest 1000)
+
+Correct answer
+
+name	          per_capital_GDP
+Australia	       66000
+Brazil	           11000
+Canada	           45000
+China	            6000
+France	           40000
+Germany            42000
+India	            2000
+Italy	           33000
+Japan	           47000
+Mexico	           10000
+Russia	           14000
+South Korea        22000
+Spain	           28000
+United Kingdom	   39000
+United States	   51000
+
+10. Countries where the number of characters in the name and capital are the same
+
+SELECT name, LEN(name), capital, LEN(capital)  FROM world WHERE LEN(name) = LEN(capital)
+
+Result:
+
+name	    char_in_name	capital	 char_in_capit..
+Algeria    	7	            Algiers	    7
+Angola	    6	            Luanda	    6
+Armenia 	7	            Yerevan	    7
+Botswana	8	            Gaborone	8
+Canada	    6	            Ottowa   	6
+Djibouti	8	            Djibouti	8
+Egypt	    5           	Cairo	    5
+Estonia   	7	            Tallinn	    7
+Fiji	    4	            Suva	    4
+Gambia	    6	            Banjul  	6
+Georgia	    7	            Tbilisi	    7
+Ghana	    5	            Accra   	5
+Greece	    6	            Athens	    6
+Luxembourg	10	            Luxembourg	10
+Mauritania	10	            Nouakchott	10
+Paraguay	8	            Asunción	8
+Peru	    4	            Lima    	4
+Poland	    6	            Warsaw	    6
+Russia	    6	            Moscow	    6
+Rwanda	    6	            Kigali	    6
+San Marino	10	            San Marino	10
+Singapore	9	            Singapore	9
+Taiwan   	6	            Taipei	    6
+Togo	    4	            Lomé	    4
+Turkey	    6	            Ankara	    6
+Zambia	    6	            Lusaka	    6
+
+11. Countries where the first character in the name and capital are the same
+
+SELECT name,capital FROM world WHERE LEFT(name,1) = LEFT(capital,1) and name <> capital
+
+Correct answer
+
+name          	         capital
+Algeria     	          Algiers
+Andorra	                  Andorra la Vella
+Barbados	              Bridgetown
+Belize	                  Belmopan
+Brazil	                  Brasília
+Brunei	                  Bandar Seri Begawan
+Burundi                   Bujumbura
+Guatemala	              Guatemala City
+Guyana	                  Georgetown
+Kuwait	                  Kuwait City
+Maldives	              Malé
+Marshall Islands	      Majuro
+Mexico	                  Mexico City
+Monaco	                  Monaco-Ville
+Mozambique      	      Maputo
+Niger	                  Niamey
+Panama	                  Panama City
+Papua New Guinea	      Port Moresby
+Sao Tomé and Príncipe	  São Tomé
+South Korea	              Seoul
+Sri Lanka	              Sri Jayawardenepura Kotte
+Sweden	                  Stockholm
+Taiwan	                  Taipei
+Tunisia	                  Tunis
+
+12. Countries that has all the vowels but no space in the name
+
+SELECT name FROM world WHERE name NOT LIKE '% %' and 
+name  LIKE '%a%'AND
+name LIKE '%e%'AND
+name LIKE '%i%'AND
+name LIKE '%o%'AND
+name LIKE '%u%'
+
+Correct answer
+
+name
+Mozambique
